@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temp Converter</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <style>
+
+        .result{
+            padding: 25px 0px;
+            font-size: 14px;
+        }
+
+        .equal{
+            font-size: 20px;
+        }
+
+    </style>
+
+</head>
+<body>
+    <h1>Temp Converter</h1>
+    <div class="container">
+        <input type="number" id="inputTempC" value="0"> °C 
+        <span class="equal">=</span>
+        <input type="number" id="inputTempF" value="32"> °F
+        <div id="result" class="result"><span class="badge rounded-pill text-bg-warning">Formula</span>(0°C × 9/5) + 32 = 32°F</div>
+    </div>
+    
+</body>
+
+<script>
+
+    
+    $(document).ready(function(){
+
+        $("#inputTempF").on("keyup change",function(){
+            let inputTempFarenhiet = $("#inputTempF").val();
+            // console.log(inputTempFarenhiet);
+            let celciusValue = ((inputTempFarenhiet - 32) * 5/9).toFixed(2);
+            $("#inputTempC").val(celciusValue);
+
+            $("#result").html(`<span class="badge rounded-pill text-bg-warning">Formula</span>(${inputTempFarenhiet} °F - 32 ) * 5/9 = ${celciusValue}°C`);
+        });
+
+        $("#inputTempC").on("keyup change",function(){
+            let inputTempCelcius = $("#inputTempC").val();
+            // console.log(inputTempCelcius);
+            let farenhietValue = ((inputTempCelcius * 9/5) + 32).toFixed(2);
+            $("#inputTempF").val(farenhietValue);
+
+            $("#result").html(`<span class="badge rounded-pill text-bg-warning">Formula</span>(${inputTempCelcius} °C * 9/5 ) + 32 = ${farenhietValue}°F`);
+        });
+
+        $("#btnConvert").click(function(){
+            let inputTempCelcius = $("#inputTempC").val();
+            // console.log(inputTempCelcius);
+            // Conversion logic
+            // (input * 9/5) + 32
+            farenhietValue = (inputTempCelcius * 9/5) + 32
+            // console.log(farenhietValue);
+            $("#inputTempF").val(farenhietValue);
+            
+        });
+    });
+</script>
+</html>
